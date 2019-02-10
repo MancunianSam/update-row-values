@@ -16,13 +16,12 @@ public class CsvParser {
 		return Stream.of(columnHeaders).map(String::trim);
 	}
 
-	public boolean rowMatchesFilename(String row, String csvFilename) {
-		if(nonNull(row)) {
-			String[] columns = row.split(",");
-			if(columns.length > 0 && nonNull(columns[0])) {
-				return columns[0].trim().equals(csvFilename);
-			}
+	public boolean rowMatchesFilename(String[] columns, String csvFilename) {
+		if(columns.length > 0 && nonNull(columns[0])) {
+			return columns[0].trim().equals(csvFilename);
 		}
 		return false;
 	}
+
+
 }

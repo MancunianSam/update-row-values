@@ -45,7 +45,7 @@ public class CsvParserTest {
 	public void testRowMatchFilename() {
 		CsvParser parser = new CsvParser();
 
-		boolean result = parser.rowMatchesFilename("a,b,c", "a");
+		boolean result = parser.rowMatchesFilename(new String[]{"a","b","c"}, "a");
 
 		assertTrue(result);
 	}
@@ -54,7 +54,7 @@ public class CsvParserTest {
 	public void testRowNoMatchFilename() {
 		CsvParser parser = new CsvParser();
 
-		boolean result = parser.rowMatchesFilename("a,b,c", "d");
+		boolean result = parser.rowMatchesFilename(new String[]{"a","b","c"}, "d");
 
 		assertFalse(result);
 	}
