@@ -14,7 +14,7 @@ public class CsvParser {
 		return Stream.of(columnHeaders).map(String::trim);
 	}
 
-	public Stream<String> getSelectedRow(Stream<String> rows, String csvFileName) {
-		return Stream.of();
+	public boolean rowMatchesFilename(String row, String csvFilename) {
+		return false;
 	}
 }

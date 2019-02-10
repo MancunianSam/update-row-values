@@ -9,8 +9,7 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CsvParserTest {
 
@@ -43,12 +42,20 @@ public class CsvParserTest {
 	}
 
 	@Test
-	public void testGetSelectedRow() {
-		Stream<String> rows = Stream.of("a,b,c", "d,e,f", "g,h,i");
+	public void testRowMatchFilename() {
 		CsvParser parser = new CsvParser();
 
-		Stream<String> result = parser.getSelectedRow(rows, "d");
+		boolean result = parser.rowMatchesFilename("a,b,c", "d");
 
-		assertEquals(result.collect(Collectors.toList()), Collections.singletonList("d,e,f"));
+		assertTrue(result);
+	}
+
+	@Test
+	public void testRowNoMatchFilename() {
+		CsvParser parser = new CsvParser();
+
+		boolean result = parser.rowMatchesFilename("d,b,c", "d");
+
+		assertFalse(result);
 	}
 }
