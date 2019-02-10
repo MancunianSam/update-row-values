@@ -14,6 +14,9 @@ public class RowUpdater {
 	}
 
 	public String updateIfRowMatches(UpdateRowArguments arguments, CsvParser parser, List<String> header, String[] columns) {
-		return "";
+		if (parser.rowMatchesFilename(columns, arguments.getCsvFileName())) {
+			columns = parser.replaceAtIndex(columns, arguments.getOldValue(), arguments.getNewValue(), header.indexOf(arguments.getColumn()));
+		}
+		return String.join(",", columns);
 	}
 }
