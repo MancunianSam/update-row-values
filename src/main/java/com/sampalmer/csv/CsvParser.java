@@ -23,5 +23,8 @@ public class CsvParser {
 		return false;
 	}
 
+	public String[] replaceAtIndex(String[] columns, String oldValue, String newValue, int index) {
+		return new String[]{};
+	}
 
 }
