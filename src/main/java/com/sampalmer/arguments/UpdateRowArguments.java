@@ -1,5 +1,7 @@
 package com.sampalmer.arguments;
 
+import com.sampalmer.exceptions.InvalidNumberOfArgumentsException;
+
 public class UpdateRowArguments {
 
 	private String path;
@@ -7,6 +9,17 @@ public class UpdateRowArguments {
 	private String column;
 	private String oldValue;
 	private String newValue;
+
+	public UpdateRowArguments(String args[]) {
+		if(args.length < 5) {
+			throw new InvalidNumberOfArgumentsException(args.length);
+		}
+		this.path = args[0];
+		this.csvFileName = args[1];
+		this.column = args[2];
+		this.oldValue = args[3];
+		this.newValue = args[4];
+	}
 
 	public String getPath() {
 		return path;
