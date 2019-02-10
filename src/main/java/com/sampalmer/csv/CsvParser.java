@@ -1,11 +1,10 @@
 package com.sampalmer.csv;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.stream.Stream;
 
 public class CsvParser {
 
-	public List<String> getHeaderFromRows(List<String> rows) {
-		return Collections.emptyList();
+	public Stream<String> getHeaderFromRows(Stream<String> rows) {
+		return Stream.of();
 	}
 }

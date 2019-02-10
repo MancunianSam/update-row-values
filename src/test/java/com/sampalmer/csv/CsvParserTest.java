@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,25 +15,25 @@ public class CsvParserTest {
 
 	@Test
 	public void testGetHeaderWithWhitespace() {
-		List<String> rows = Arrays.asList("a, b,  c", "d,e,f");
+		Stream<String> rows = Stream.of("a, b,  c", "d,e,f");
 		CsvParser parser = new CsvParser();
-		List<String> headerFromRows = parser.getHeaderFromRows(rows);
+		Stream<String> headerFromRows = parser.getHeaderFromRows(rows);
 
-		assertEquals(Arrays.asList("a", "b", "c"), headerFromRows);
+		assertEquals(Arrays.asList("a", "b", "c"), headerFromRows.collect(Collectors.toList()));
 	}
 
 	@Test
 	public void testGetHeaderWithoutWhitespace() {
-		List<String> rows = Arrays.asList("a,b,c", "d,e,f");
+		Stream<String> rows = Stream.of("a,b,c", "d,e,f");
 		CsvParser parser = new CsvParser();
-		List<String> headerFromRows = parser.getHeaderFromRows(rows);
+		Stream<String> headerFromRows = parser.getHeaderFromRows(rows);
 
-		assertEquals(Arrays.asList("a", "b", "c"), headerFromRows);
+		assertEquals(Arrays.asList("a", "b", "c"), headerFromRows.collect(Collectors.toList()));
 	}
 
 	@Test
 	public void testGetHeaderFromEmptyInput() {
-		List<String> rows = Collections.emptyList();
+		Stream<String> rows = Stream.of();
 		CsvParser parser = new CsvParser();
 
 		Executable executable = () -> parser.getHeaderFromRows(rows);
