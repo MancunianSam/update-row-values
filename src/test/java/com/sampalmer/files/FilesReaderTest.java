@@ -1,6 +1,5 @@
-package com.sampalmer;
+package com.sampalmer.files;
 
-import com.sampalmer.files.FileReader;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -12,11 +11,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+public class FilesReaderTest {
 
-public class AppTest {
-
-    @Test
-    public void testFileLoading(@TempDir Path path) throws IOException {
+	@Test
+	public void testFileLoading(@TempDir Path path) throws IOException {
 		Path filePath = Files.createTempFile(path, "", "");
 		List<String> rows = Arrays.asList("a,b,c", "d,e,f");
 		Files.write(filePath, rows);
