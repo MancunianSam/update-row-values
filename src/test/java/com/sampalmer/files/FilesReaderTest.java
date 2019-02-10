@@ -8,8 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,8 +20,8 @@ public class FilesReaderTest {
 		Files.write(filePath, rows);
 
 		FileReader fileReader = new FileReader();
-		Stream<String> resultRows = fileReader.getCsvFileRows(filePath.toString());
+		List<String> resultRows = fileReader.getCsvFileRows(filePath.toString());
 
-		assertEquals(rows, resultRows.collect(Collectors.toList()));
+		assertEquals(rows, resultRows);
 	}
 }
