@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -68,11 +68,12 @@ public class RowUpdaterTest {
 				"file1, London, \"a file about London\", hash",
 				"file55, Londom, \"London was initially incorrectly spelled as Londom\", hash");
 		Files.write(filePath, rows);
-		String[] args = new String[]{"","file55", "origin", "Londom", "London"};
+		String[] args = new String[]{filePath.toString(),"file55", "origin", "Londom", "London"};
 		UpdateRowArguments arguments = new UpdateRowArguments(args);
 		rowUpdater.updateRowValues(arguments);
 
-		Stream<String> result = Files.lines(Paths.get(path.toString(), "output.csv"));
+		List<String> result = Files.lines(Paths.get(path.toString(), "output.csv"))
+				.collect(Collectors.toList());
 
 		List<String> expectedResult = Arrays.asList("filename, origin, metadata, hash",
 				"file1, London, \"a file about London\", hash",
