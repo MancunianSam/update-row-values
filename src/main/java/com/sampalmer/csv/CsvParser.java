@@ -26,7 +26,7 @@ public class CsvParser {
 	}
 
 	public String[] replaceAtIndex(String[] columns, String oldValue, String newValue, int index) {
-		if(isNull(columns) || index > columns.length - 1) {
+		if(isNull(columns) || index > columns.length - 1 || index < 0) {
 			throw new InvalidIndexException();
 		}
 
