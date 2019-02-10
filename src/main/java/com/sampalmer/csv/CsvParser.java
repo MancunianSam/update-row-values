@@ -1,9 +1,11 @@
 package com.sampalmer.csv;
 
 import com.sampalmer.exceptions.EmptyCsvFileException;
+import com.sampalmer.exceptions.InvalidIndexException;
 
 import java.util.stream.Stream;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 public class CsvParser {
@@ -24,7 +26,17 @@ public class CsvParser {
 	}
 
 	public String[] replaceAtIndex(String[] columns, String oldValue, String newValue, int index) {
-		return new String[]{};
+		if(isNull(columns) || index > columns.length - 1) {
+			throw new InvalidIndexException();
+		}
+
+		String[] newColumns = columns.clone();
+		String value = newColumns[index];
+		if(nonNull(value)) {
+			String replacedValue = value.replaceAll(oldValue, newValue);
+			newColumns[index] = replacedValue;
+		}
+		return newColumns;
 	}
 
 }
